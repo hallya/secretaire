@@ -9,7 +9,7 @@
 | ID | Tâche | Priorité | Statut | Preuve avant → après |
 |---|---|---|---|---|
 | T0 | Rattacher le repo aux sessions cloud, en lecture et en écriture | MVP | Bloqué : l'application GitHub de Claude n'est pas installée sur `hallya/secretaire` | Push refusé → commits visibles sur `origin/main` |
-| T3 | Règle de reprise : toute nouvelle session retrouve l'état seule | MVP | En cours : `CLAUDE.md` complété le 2026-11-01 | Nouvelle session Claude Code : « Où en est-on ? » donne l'état et la prochaine action ⚠️ test fait par l'utilisateur |
+| T3 | Règle de reprise : toute nouvelle session retrouve l'état seule | MVP | En cours : `CLAUDE.md` complété le 2026-11-01, test final à faire par l'utilisateur après le push | Nouvelle session Claude Code : « Où en est-on ? » donne l'état et la prochaine action ⚠️ test fait par l'utilisateur |
 | T4 | CI de preuve (GitHub Actions) : compilation et tests en natif et en `wasm32` | MVP | À faire, après T0 | Aucun run → Claude lit lui-même le statut d'un run |
 | T6 | Découper le MVP fonctionnel (dictée → texte, texte → voix) en tâches unitaires avec leurs preuves | MVP | À faire, à valider avec l'utilisateur | Aucune tâche fonctionnelle → liste validée dans ce fichier |
 | N1 | Vue tableau du backlog | Nice-to-have | À faire | — |
