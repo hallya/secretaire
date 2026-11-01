@@ -31,4 +31,6 @@ Si l'utilisateur demande « Où en est-on ? », réponds à partir de ces trois 
 
 ## Règles
 
+- L'utilisateur modifie aussi les notes depuis Obsidian, qui synchronise toutes les minutes (D-013, guide : `notes/guides/obsidian.md`). Avant d'écrire dans `notes/` : `git pull`. Avant d'ajouter une ligne en fin de fichier : vérifier que le fichier se termine par un retour à la ligne.
+
 - Les secrets (clé Mistral, etc.) ne passent jamais par le chat ni par le repo. En cloud, ils sont dans les « Network secrets » ; pour la CI, dans les secrets GitHub Actions.

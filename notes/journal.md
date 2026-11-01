@@ -40,3 +40,9 @@
 - 💡 16:10 : GitHub lance la CI sur le **dernier commit d'un push**, pas sur chaque commit. Pour lire la preuve d'un commit, le pousser seul ou chercher le run du commit de tête. Un push qui ne touche que `notes/` ne déclenche aucun run (vérifié avec `e9b22a5`) ; le push `d60ea3b` + `ac9bd9b` (avec le `.gitignore`) a donné le run vert `41319372779`.
 - ✅ test de synchronisation depuis Obsidian
 - ✅ 18:36 : réponse de Claude — test reçu (`5fed9e4`, écrit dans Obsidian, signé avec la clé Bitwarden). Cette ligne doit apparaître dans Obsidian en moins d'une minute.
+- ❌ 17:55 : premier essai de T8. La ligne de test est restée sur le Mac : le plugin Git n'avait que le pull automatique, la synchronisation des modifications était à 0. Diagnostic fait par Claude en lisant les réglages du plugin, via le lien avec le Mac.
+- ❌ 18:09 : commit refusé (« Couldn't find key in agent? »). Les commits sont signés via l'agent SSH Bitwarden, qu'Obsidian, lancé depuis le Dock, ne voit pas. Solution : un programme de signature qui cible le socket Bitwarden (`gpg.ssh.program`).
+- ❌ 18:23 : push refusé. GitHub n'accepte pas les mots de passe, et Obsidian n'arrive pas à utiliser la connexion `gh`. Solution : jeton de `gh` copié dans le trousseau macOS, `credential.helper osxkeychain` pour ce repo.
+- ✅ 18:35 : **T8 prouvé dans les deux sens.** `5fed9e4` (écrit dans Obsidian, signé) arrive sur GitHub sans déclencher la CI. La réponse de Claude (`869af5f`, `cd60b03`) est retrouvée dans la copie locale du Mac à 18:38. Configuration consignée dans `notes/guides/obsidian.md`.
+- 💡 GitHub affiche `5fed9e4` comme non vérifié (`unknown_key`) : la clé Bitwarden n'est pas déclarée comme clé de signature sur GitHub (T8d, nice-to-have).
+- 💡 Un fichier modifié dans Obsidian peut se terminer sans retour à la ligne. Une ligne ajoutée à la fin s'est collée à la précédente (corrigé en `cd60b03`). Toujours vérifier la fin du fichier avant d'ajouter une ligne.
