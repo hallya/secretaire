@@ -5,6 +5,8 @@
 
 use std::fmt;
 
+use serde_json::Value;
+
 use crate::audio::Audio;
 use crate::http::{Body, HttpRequest, HttpResponse, Method, Part};
 use crate::provider::{ProviderError, SpeechToText};
@@ -72,19 +74,68 @@ impl SpeechToText for MistralSpeechToText {
         PROVIDER_NAME
     }
 
-    fn transcription_request(&self, _audio: &Audio) -> HttpRequest {
-        // Red step of T11: not implemented yet.
+    fn transcription_request(&self, audio: &Audio) -> HttpRequest {
+        let mut parts = vec![
+            Part::Text {
+                name: "model".to_owned(),
+                value: self.model.clone(),
+            },
+            Part::File {
+                name: "file".to_owned(),
+                filename: format!("audio.{}", audio.format.extension()),
+                mime_type: audio.format.mime_type().to_owned(),
+                bytes: audio.bytes.clone(),
+            },
+        ];
+        if let Some(language) = &self.language {
+            parts.push(Part::Text {
+                name: "language".to_owned(),
+                value: language.clone(),
+            });
+        }
         HttpRequest {
             method: Method::Post,
-            url: String::new(),
-            headers: vec![],
-            body: Body::Empty,
+            url: format!(
+                "{}/v1/audio/transcriptions",
+                self.base_url.trim_end_matches('/')
+            ),
+            headers: vec![(
+                "Authorization".to_owned(),
+                format!("Bearer {}", self.api_key),
+            )],
+            body: Body::Multipart(parts),
         }
     }
 
-    fn parse_transcription(&self, _response: &HttpResponse) -> Result<String, ProviderError> {
-        // Red step of T11: not implemented yet.
-        Err(ProviderError::InvalidResponse("not implemented".to_owned()))
+    fn parse_transcription(&self, response: &HttpResponse) -> Result<String, ProviderError> {
+        if !response.is_success() {
+            return Err(http_error(response));
+        }
+        let json: Value = serde_json::from_slice(&response.body)
+            .map_err(|error| ProviderError::InvalidResponse(error.to_string()))?;
+        json.get("text")
+            .and_then(Value::as_str)
+            .map(|text| text.trim().to_owned())
+            .ok_or_else(|| ProviderError::InvalidResponse("missing field `text`".to_owned()))
+    }
+}
+
+/// HTTP error carrying the provider's own message when it sends one.
+fn http_error(response: &HttpResponse) -> ProviderError {
+    let message = serde_json::from_slice::<Value>(&response.body)
+        .ok()
+        .and_then(|json| {
+            ["message", "detail"].iter().find_map(|key| {
+                json.get(*key).map(|value| match value {
+                    Value::String(text) => text.clone(),
+                    other => other.to_string(),
+                })
+            })
+        })
+        .unwrap_or_else(|| String::from_utf8_lossy(&response.body).trim().to_owned());
+    ProviderError::Http {
+        status: response.status,
+        message,
     }
 }
 
