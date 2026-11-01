@@ -1,7 +1,6 @@
 filters:
   and:
     - file.inFolder("notes/taches")
-
 properties:
   id:
     displayName: ID
@@ -11,32 +10,31 @@ properties:
     displayName: Priorité
   fait_le:
     displayName: Fait le
-
 views:
   - type: kanban
     name: Kanban
-    order:
-      - file.name
-      - priorite
     groupBy:
       property: statut
       direction: ASC
+    order:
+      - file.name
+      - priorite
   - type: table
     name: Tableau
+    groupBy:
+      property: statut
+      direction: ASC
     order:
       - id
       - file.name
       - priorite
       - fait_le
-    groupBy:
-      property: statut
-      direction: ASC
   - type: table
     name: MVP à faire
     filters:
       and:
-        - 'priorite == "MVP"'
-        - 'statut != "4. Fait"'
+        - priorite == "MVP"
+        - statut != "4. Fait"
     order:
       - id
       - file.name

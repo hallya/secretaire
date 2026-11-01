@@ -1,7 +1,6 @@
 filters:
   and:
     - file.inFolder("notes/decisions")
-
 properties:
   id:
     displayName: ID
@@ -11,24 +10,23 @@ properties:
     displayName: Date
   origine:
     displayName: Origine
-
 views:
   - type: table
     name: Toutes
+    groupBy:
+      property: statut
+      direction: ASC
     order:
       - id
       - file.name
       - date
       - origine
-    groupBy:
-      property: statut
-      direction: ASC
   - type: table
     name: En attente
     filters:
       or:
-        - 'statut == "1. À prendre"'
-        - 'statut == "2. Proposée"'
+        - statut == "1. À prendre"
+        - statut == "2. Proposée"
     order:
       - id
       - file.name
