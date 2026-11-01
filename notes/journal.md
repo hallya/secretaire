@@ -24,3 +24,7 @@
 - 💡 Le repo est le seul endroit lisible par tous les espaces de travail : les notes y vivent (D-011).
 - 💡 Plan B si le réseau manque : compilations et appels à Mistral passent par la CI GitHub Actions, avec la clé en secret GitHub.
 - 💡 Les tests du micro, du haut-parleur et de l'écriture dans une autre application ne peuvent se faire que sur le Mac (D-015).
+- ✅ 15:30 : l'utilisateur installe l'application GitHub de Claude sur le repo. Push réussi : `f7f1096`, `b455a4e`, `3a37773` visibles sur `origin/main` (T0 prouvé).
+- ✅ 15:30 : depuis la conversation du projet, l'API GitHub répond 200 (repo et liste des runs de CI). Claude peut donc lire lui-même les preuves de CI.
+- 💡 Avec le push et la lecture de la CI, tout peut se faire depuis le projet claude.ai : D-014 révisée en « un seul endroit pour travailler ».
+- 💡 15:35 : analyse des outils de collaboration (D-013). Aucun outil auto-hébergé dans l'annuaire des connecteurs de Claude ; recommandation : Obsidian ouvert sur le repo, Notion en plan B.

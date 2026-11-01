@@ -8,18 +8,22 @@
 
 | ID | Tâche | Priorité | Statut | Preuve avant → après |
 |---|---|---|---|---|
-| T0 | Rattacher le repo aux sessions cloud, en lecture et en écriture | MVP | Bloqué : l'application GitHub de Claude n'est pas installée sur `hallya/secretaire` | Push refusé → commits visibles sur `origin/main` |
-| T3 | Règle de reprise : toute nouvelle session retrouve l'état seule | MVP | En cours : `CLAUDE.md` complété le 2026-11-01, test final à faire par l'utilisateur après le push | Nouvelle session Claude Code : « Où en est-on ? » donne l'état et la prochaine action ⚠️ test fait par l'utilisateur |
-| T4 | CI de preuve (GitHub Actions) : compilation et tests en natif et en `wasm32` | MVP | À faire, après T0 | Aucun run → Claude lit lui-même le statut d'un run |
+| T3 | Règle de reprise : toute nouvelle conversation du projet retrouve l'état seule | MVP | En cours : `CLAUDE.md` poussé ; texte à coller dans les instructions du projet claude.ai (D-014) | Nouvelle conversation du projet : « Où en est-on ? » donne l'état et la prochaine action ⚠️ test fait par l'utilisateur |
+| T8 | Fenêtre ergonomique sur les notes : Obsidian ouvert sur le repo, synchronisé avec GitHub (D-013) | MVP, si D-013 est acceptée | En attente de décision | Aucune modification de l'utilisateur dans l'historique → un commit de test fait depuis Obsidian, visible sur GitHub (vérifiable par Claude) |
+| T4 | CI de preuve (GitHub Actions) : compilation et tests en natif et en `wasm32`, en ignorant les changements de `notes/` | MVP | À faire | Aucun run → Claude lit lui-même le statut d'un run via l'API GitHub (accès vérifié le 2026-11-01) |
 | T6 | Découper le MVP fonctionnel (dictée → texte, texte → voix) en tâches unitaires avec leurs preuves | MVP | À faire, à valider avec l'utilisateur | Aucune tâche fonctionnelle → liste validée dans ce fichier |
-| N1 | Vue tableau du backlog | Nice-to-have | À faire | — |
+| T8b | Vue tableau (kanban) du backlog dans Obsidian | Nice-to-have | À faire, après T8 | Backlog en tableau → colonnes « À faire / En cours / Fait » affichées |
+| T8c | Synchronisation des notes sur l'iPhone | Nice-to-have | À faire, après T8 | Note absente du téléphone → modification visible en moins de 2 minutes |
 | N2 | Récapitulatif hebdomadaire planifié | Nice-to-have | À faire | — |
 
 ## Fait
 
 | ID | Tâche | Priorité | Fait le | Preuve avant → après |
 |---|---|---|---|---|
+| T0 | Rattacher le repo à la conversation du projet, en lecture et en écriture | MVP | 2026-11-01 | Push refusé (403) → `f7f1096`, `b455a4e`, `3a37773` visibles sur `origin/main` |
 | T1 | Structure de notes dans le repo (`notes/`, `CLAUDE.md`) | MVP | 2026-11-01 | Repo vide → commit initial `e8b5335` |
 | T2 | Migrer décisions, backlog et journal depuis la note du projet claude.ai | MVP | 2026-11-01 | « Voxtral » dans `notes/` : 0 → au moins 1 résultat ; décisions : 0 → 15 |
 | T5 | Ouvrir le réseau des sessions Claude Code cloud (crates.io, Rust, Mistral) | Nice-to-have (la CI sert de plan B) | 2026-11-01 | 403 → `serde` compilé, `wasm32` installé, Mistral répond 200 |
 | T7 | Licence MIT OR Apache-2.0 (D-010) | MVP | 2026-11-01 | Un seul fichier `LICENSE` → `LICENSE-MIT` et `LICENSE-APACHE` cités dans le README |
+
+<!-- N1 (vue tableau) est remplacée par T8b. -->

@@ -61,13 +61,33 @@ Origine : `CLAUDE.md` du commit initial.
 - Cloud (claude.ai/code) : notes, planification, code, preuves par la CI.
 - Mac en local : uniquement les tests physiques.
 
-## D-013 — Pas d'outil de notes type Notion pour l'instant · 2026-11-01 · proposée
+## D-013 — Outil de collaboration sur les notes : Obsidian ouvert sur le repo · 2026-11-01 · proposée (révisée)
 
-Raisons : un outil auto-hébergé n'est pas joignable depuis les espaces cloud de Claude sans exposer un connecteur MCP sur internet, et il doublerait la source de vérité. Si un jour une interface plus riche est utile : Docmost (AGPL-3.0, PostgreSQL et Redis, authentification intégrée). Pour auto-héberger la forge elle-même : Forgejo, vers lequel `notes/` migrerait tel quel.
+Besoin exprimé par l'utilisateur : GitHub est simple mais peu ergonomique pour lui. Il faut un outil gratuit (auto-hébergeable si possible) que Claude utilise par MCP ou API, et que l'utilisateur utilise par le web ou une application native.
 
-## D-014 — Les conversations du projet claude.ai servent au pilotage, pas au code · 2026-11-01 · proposée
+Contrainte côté Claude, constatée le 2026-11-01 : depuis les conversations du projet, Claude n'atteint que GitHub et les connecteurs de l'annuaire de Claude. Aucun outil auto-hébergé n'y figure. Le joindre demanderait un connecteur personnalisé, donc un serveur MCP exposé en HTTPS sur internet.
 
-Précise D-012. Constat : les conversations du projet tournent dans l'environnement `cloud_default`, sans accès à crates.io ni à Mistral. Les sessions Claude Code cloud ont ce réseau. Donc : piloter et décider dans les conversations du projet, coder et tester dans les sessions Claude Code.
+Options évaluées :
+- **Obsidian sur le repo** (recommandé) : application native gratuite (Mac, iOS, Android, Windows), hors ligne. Un plugin de synchronisation git récupère les changements toutes les 30 s sur ordinateur et 60 s sur mobile, et pousse après chaque modification. Claude continue d'écrire en Markdown via git. Une seule source de vérité, rien à héberger, historique git. Inconvénients : un jeton GitHub à créer par l'utilisateur, beaucoup de petits commits automatiques, conflits possibles si on modifie la même ligne en même temps.
+- **Notion** (plan B) : la meilleure ergonomie (bases de données, vue kanban, commentaires, applications natives). Connecteur officiel dans l'annuaire de Claude. Gratuit pour un utilisateur seul : pages et blocs illimités, historique de 7 jours, fichiers de 5 Mo max. Inconvénients : pas auto-hébergeable, et les notes quitteraient le repo, ce qui fait deux endroits (notes dans Notion, code et preuves dans GitHub).
+- **Linear** : excellent pour le backlog seul (lien automatique avec les commits GitHub, application native). Connecteur officiel. Plan gratuit limité à 250 tickets et 2 équipes. Pas auto-hébergeable. Ne couvre ni les décisions ni le journal.
+- **Plane** (auto-hébergeable, équivalent libre de Linear) : serveur MCP officiel distant, mais l'authentification OAuth exige l'édition commerciale. L'édition communautaire gratuite ne fonctionne qu'en local, donc pas depuis le cloud de Claude. Demande aussi un hébergement en HTTPS public.
+- **AFFiNE** (auto-hébergeable, équivalent libre de Notion, applications natives) : MCP officiel intégré et gratuit, mais pas utilisable comme connecteur web de claude.ai, et les outils d'écriture sont réservés aux versions de développement. Pas d'écriture dans les bases de données.
+- **Outline, Docmost** (wikis auto-hébergeables) : pas de connecteur dans l'annuaire, hébergement à prévoir.
+- **Claude Docs** (déjà inclus dans claude.ai) : documents modifiables et commentables dans l'application Claude, mais illisibles par la CI et hors du repo.
+
+Raison du choix recommandé : c'est la seule option qui ajoute une vraie application native sans créer une deuxième source de vérité ni rien à héberger.
+
+## D-014 — Un seul endroit pour travailler : le projet claude.ai « Secretaire » · 2026-11-01 · proposée (révisée)
+
+Remplace la version précédente (« pilotage dans le projet, code dans les sessions Claude Code »), devenue inutile. Constat du 2026-11-01 vers 15:30 : depuis une conversation du projet, Claude peut pousser sur le repo et lire l'API GitHub, y compris les résultats de CI.
+
+- L'utilisateur parle à Claude **uniquement** dans le projet « Secretaire » (web, application de bureau ou mobile : c'est le même projet).
+- Quand une conversation devient longue, on en ouvre une nouvelle dans le même projet. La reprise est automatique grâce aux instructions du projet et à `CLAUDE.md` (T3).
+- Les notes vivent dans `notes/` du repo (D-011), lisibles dans Obsidian (D-013).
+- Les preuves sont fournies par la CI GitHub Actions, que Claude lit lui-même.
+- L'utilisateur n'ouvre plus de session Claude Code lui-même. Si Claude en a besoin, il s'en occupe ou dit exactement quoi faire.
+- Seule limite : pas de compilation instantanée dans ces conversations (pas d'accès à crates.io). Chaque essai passe par la CI et prend quelques minutes. Si c'est trop lent, Claude pourra tester une délégation vers une session cloud qui a le réseau.
 
 ## D-015 — Comment prouver les tests physiques · — · à prendre
 
