@@ -46,3 +46,4 @@
 - ✅ 18:35 : **T8 prouvé dans les deux sens.** `5fed9e4` (écrit dans Obsidian, signé) arrive sur GitHub sans déclencher la CI. La réponse de Claude (`869af5f`, `cd60b03`) est retrouvée dans la copie locale du Mac à 18:38. Configuration consignée dans `notes/guides/obsidian.md`.
 - 💡 GitHub affiche `5fed9e4` comme non vérifié (`unknown_key`) : la clé Bitwarden n'est pas déclarée comme clé de signature sur GitHub (T8d, nice-to-have).
 - 💡 Un fichier modifié dans Obsidian peut se terminer sans retour à la ligne. Une ligne ajoutée à la fin s'est collée à la précédente (corrigé en `cd60b03`). Toujours vérifier la fin du fichier avant d'ajouter une ligne.
+- ✅ 19:04 : pilote T9 poussé : `Accueil.md`, 3 notes de tâches, 1 note de décision, vues `Backlog.base` (kanban, tableau, MVP à faire) et `Décisions.base`. Propriétés, fichiers `.base` et liens vérifiés par script. La vue kanban demande Obsidian 1.14 ou plus récent.

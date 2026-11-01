@@ -8,11 +8,13 @@
 
 | ID | Tâche | Priorité | Statut | Preuve avant → après |
 |---|---|---|---|---|
+| T9 | Pilote d'un format de notes plus lisible dans Obsidian : page d'accueil, une note par tâche et par décision, vues kanban et tableau | Prioritaire (demandé avant T6) | En cours : pilote poussé, en attente de l'avis de l'utilisateur | Notes jugées difficiles à lire → l'utilisateur juge le pilote lisible dans Obsidian ⚠️ jugement de l'utilisateur ; fichiers valides vérifiés par Claude |
+| T9b | Migration complète vers le nouveau format, puis mise à jour de `CLAUDE.md` | Prioritaire, après validation de T9 | À faire | Chaque tâche et décision existe une fois avec ses propriétés, rien n'est perdu (vérifié par script) ; « Où en est-on ? » fonctionne toujours ⚠️ test de l'utilisateur |
 | T4b | Contrôles de qualité en CI : formatage (`cargo fmt --check`) et lints (`clippy`) | Nice-to-have | À faire | Code mal formaté accepté → run rouge sur un défaut de formatage |
 | T4c | Exécuter les tests aussi en `wasm32` (pas seulement compiler) | Nice-to-have | À faire | Tests non exécutés en `wasm32` → job de tests `wasm32` vert |
 | T4d | CI multi-OS (macOS, Windows), dès que la crate `cli` existe | Nice-to-have | À faire, après la première tâche `cli` | Linux seulement → les trois OS verts |
 | T6 | Découper le MVP fonctionnel (dictée → texte, texte → voix) en tâches unitaires avec leurs preuves | MVP | À faire, à valider avec l'utilisateur | Aucune tâche fonctionnelle → liste validée dans ce fichier |
-| T8b | Vue tableau (kanban) du backlog dans Obsidian | Nice-to-have | À faire | Backlog en tableau → colonnes « À faire / En cours / Fait » affichées |
+| T8b | Vue tableau (kanban) du backlog dans Obsidian | Nice-to-have | Remplacée par la vue Kanban native du pilote T9 | Backlog en tableau → colonnes « À faire / En cours / Fait » affichées |
 | T8c | Synchronisation des notes sur l'iPhone | Nice-to-have | À faire | Note absente du téléphone → modification visible en moins de 2 minutes |
 | T8d | Badge « Verified » sur GitHub pour les commits de l'utilisateur : déclarer la clé Bitwarden comme clé de signature | Nice-to-have | À faire (action de l'utilisateur dans les réglages GitHub) | `5fed9e4` non vérifié (`unknown_key`) → prochain commit vérifié selon l'API GitHub |
 | N2 | Récapitulatif hebdomadaire planifié | Nice-to-have | À faire | — |
