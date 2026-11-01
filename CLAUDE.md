@@ -53,6 +53,7 @@ Une ou deux phrases : ce que la tâche change, et pour qui.
 - **Prioriser.** Marquer chaque tâche MVP ou nice-to-have, et avancer d'abord vers le MVP.
 - **Dire quand une preuve est hors de portée.** Si tu ne peux pas vérifier une preuve toi-même, dis-le et cherche avec l'utilisateur une autre façon de la fournir.
 - **Noter les preuves** dans le message de commit et dans la note de la tâche.
+- **Langue du code (D-018)** : tout en anglais, y compris les noms des tests et les données de test. Commentaires de documentation en français. Interface utilisateur (commandes, messages) en français.
 
 ## Mise à jour des notes, à la fin de chaque tâche
 
