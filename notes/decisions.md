@@ -61,7 +61,7 @@ Origine : `CLAUDE.md` du commit initial.
 - Cloud (claude.ai/code) : notes, planification, code, preuves par la CI.
 - Mac en local : uniquement les tests physiques.
 
-## D-013 — Outil de collaboration sur les notes : Obsidian ouvert sur le repo · 2026-11-01 · proposée (révisée après la seconde recherche, en attente de confirmation)
+## D-013 — Outil de collaboration sur les notes : Obsidian ouvert sur le repo · 2026-11-01 · acceptée
 
 Besoin exprimé par l'utilisateur : GitHub est simple mais peu ergonomique pour lui. Il faut un outil gratuit (auto-hébergeable si possible) que Claude utilise par MCP ou API, et que l'utilisateur utilise par le web ou une application native.
 
@@ -98,7 +98,7 @@ Fait nouveau : avec le NAS, un outil auto-hébergé devient joignable par Claude
 
 Conclusion de la seconde recherche : la recommandation Obsidian tient. C'est la seule option qui ne demande ni d'exposer le NAS, ni une deuxième source de vérité, ni de dépendre d'un connecteur communautaire. Si l'utilisateur veut plus tard une vraie application auto-hébergée : Outline sur le NAS est l'option la plus solide côté Claude.
 
-## D-016 — Rôle du NAS Synology DS1621xs+ · 2026-11-01 · proposée
+## D-016 — Rôle du NAS Synology DS1621xs+ · 2026-11-01 · acceptée
 
 Matériel : Xeon D-1527 (4 cœurs, 2,2 GHz), 8 Go de RAM extensibles à 32 Go, 10 GbE, sans carte graphique.
 

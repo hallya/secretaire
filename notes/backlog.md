@@ -8,8 +8,8 @@
 
 | ID | Tâche | Priorité | Statut | Preuve avant → après |
 |---|---|---|---|---|
-| T8 | Fenêtre ergonomique sur les notes (outil choisi en D-013) | MVP | En attente de D-013 (seconde recherche demandée : Anytype, recherche élargie, Synology) | Aucune modification de l'utilisateur dans l'historique → un commit de test fait depuis Obsidian, visible sur GitHub (vérifiable par Claude) |
-| T4 | CI de preuve (GitHub Actions) : compilation et tests en natif et en `wasm32`, en ignorant les changements de `notes/` | MVP | À faire | Aucun run → Claude lit lui-même le statut d'un run via l'API GitHub (accès vérifié le 2026-11-01) |
+| T8 | Fenêtre ergonomique sur les notes : Obsidian ouvert sur le repo (D-013) | MVP | À faire : installation par l'utilisateur, étapes fournies le 2026-11-01 | Aucune modification de l'utilisateur dans l'historique → un commit de test fait depuis Obsidian, visible sur GitHub (vérifiable par Claude) |
+| T4 | CI de preuve (GitHub Actions) : compilation et tests en natif et en `wasm32`, en ignorant les changements de `notes/` | MVP | En cours | Aucun run → Claude lit lui-même le statut d'un run via l'API GitHub (accès vérifié le 2026-11-01) |
 | T6 | Découper le MVP fonctionnel (dictée → texte, texte → voix) en tâches unitaires avec leurs preuves | MVP | À faire, à valider avec l'utilisateur | Aucune tâche fonctionnelle → liste validée dans ce fichier |
 | T8b | Vue tableau (kanban) du backlog dans Obsidian | Nice-to-have | À faire, après T8 | Backlog en tableau → colonnes « À faire / En cours / Fait » affichées |
 | T8c | Synchronisation des notes sur l'iPhone | Nice-to-have | À faire, après T8 | Note absente du téléphone → modification visible en moins de 2 minutes |

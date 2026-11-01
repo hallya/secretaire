@@ -32,3 +32,4 @@
 - ✅ 15:40 : D-014 acceptée (un seul endroit : le projet claude.ai). D-012 remplacée, `CLAUDE.md` mis à jour.
 - 💡 15:40 : l'utilisateur dispose d'un NAS Synology DS1621xs+, à prendre en compte pour l'auto-hébergement et les tâches déléguables. D-013 rouverte : avis sur Anytype et recherche élargie demandés avant décision.
 - 💡 15:45 : seconde recherche D-013 (Anytype, outils auto-hébergés, NAS). Fait nouveau : avec le NAS, un outil auto-hébergé est joignable via un connecteur personnalisé claude.ai. Mais Anytype n'a pas de MCP distant officiel, et Outline (MCP officiel intégré) n'a pas de kanban. La recommandation Obsidian tient. Rôle du NAS consigné en D-016 (proposée).
+- ✅ 16:01 : D-013 acceptée (Obsidian ouvert sur le repo) et D-016 acceptée (rôle du NAS). Feu vert de l'utilisateur pour T4.
