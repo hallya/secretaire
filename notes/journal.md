@@ -33,3 +33,7 @@
 - 💡 15:40 : l'utilisateur dispose d'un NAS Synology DS1621xs+, à prendre en compte pour l'auto-hébergement et les tâches déléguables. D-013 rouverte : avis sur Anytype et recherche élargie demandés avant décision.
 - 💡 15:45 : seconde recherche D-013 (Anytype, outils auto-hébergés, NAS). Fait nouveau : avec le NAS, un outil auto-hébergé est joignable via un connecteur personnalisé claude.ai. Mais Anytype n'a pas de MCP distant officiel, et Outline (MCP officiel intégré) n'a pas de kanban. La recommandation Obsidian tient. Rôle du NAS consigné en D-016 (proposée).
 - ✅ 16:01 : D-013 acceptée (Obsidian ouvert sur le repo) et D-016 acceptée (rôle du NAS). Feu vert de l'utilisateur pour T4.
+- ✅ 16:03 : **T4 rouge.** Squelette Rust (workspace, crate `secretaire-core`) et CI poussés (`c25efd2`). Le push d'un workflow par l'application GitHub de Claude est accepté. Run `41319231807` : « Tests (natif) » en échec comme prévu, « Compilation (wasm32) » en succès.
+- ✅ 16:04 : **T4 vert, T4 prouvé.** Correction poussée (`c2a03bf`). Run `41319297636` : les deux jobs en succès. Un run dure environ 20 secondes.
+- 💡 La CI ne fait que compiler en `wasm32` ; exécuter les tests en `wasm32`, le formatage, les lints et le multi-OS sont notés en nice-to-have (T4b à T4d).
+- ✅ 16:06 : `.obsidian/` ajouté au `.gitignore`, en préparation de T8.
