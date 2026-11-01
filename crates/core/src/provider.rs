@@ -99,20 +99,26 @@ impl Registry {
 
     /// Fournisseur de reconnaissance nommé `name`.
     pub fn speech_to_text(&self, name: &str) -> Result<&dyn SpeechToText, ProviderError> {
-        // Étape rouge de T10 : choix non implémenté.
-        Err(ProviderError::UnknownProvider {
-            function: Function::SpeechToText,
-            name: name.to_owned(),
-        })
+        self.speech_to_text
+            .iter()
+            .find(|provider| provider.name() == name)
+            .map(|provider| provider.as_ref())
+            .ok_or_else(|| ProviderError::UnknownProvider {
+                function: Function::SpeechToText,
+                name: name.to_owned(),
+            })
     }
 
     /// Fournisseur de lecture nommé `name`.
     pub fn text_to_speech(&self, name: &str) -> Result<&dyn TextToSpeech, ProviderError> {
-        // Étape rouge de T10 : choix non implémenté.
-        Err(ProviderError::UnknownProvider {
-            function: Function::TextToSpeech,
-            name: name.to_owned(),
-        })
+        self.text_to_speech
+            .iter()
+            .find(|provider| provider.name() == name)
+            .map(|provider| provider.as_ref())
+            .ok_or_else(|| ProviderError::UnknownProvider {
+                function: Function::TextToSpeech,
+                name: name.to_owned(),
+            })
     }
 
     /// Un fournisseur par fonction, selon la sélection de l'utilisateur.
