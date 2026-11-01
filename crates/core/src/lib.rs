@@ -1,7 +1,7 @@
-//! Cœur de Secretaire.
+//! Secretaire core.
 //!
-//! Logique pure, sans accès au système (fichiers, audio, réseau), afin de
-//! compiler à la fois en natif et en `wasm32` (décision D-008).
+//! Pure logic with no system access (files, audio, network), so that it
+//! compiles both natively and to `wasm32` (decision D-008).
 
 pub mod audio;
 pub mod http;
@@ -11,7 +11,7 @@ pub use audio::{Audio, AudioFormat};
 pub use http::{Body, HttpRequest, HttpResponse, Method, Part};
 pub use provider::{Function, ProviderError, Registry, Selection, SpeechToText, TextToSpeech};
 
-/// Version de la bibliothèque, telle que déclarée dans `Cargo.toml`.
+/// Library version, as declared in `Cargo.toml`.
 pub fn version() -> &'static str {
     env!("CARGO_PKG_VERSION")
 }

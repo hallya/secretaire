@@ -1,6 +1,6 @@
 [package]
 name = "secretaire-core"
-description = "Cœur de Secretaire : logique pure, sans accès au système, compilable en natif et en WebAssembly (D-008)."
+description = "Secretaire core: pure logic with no system access, compiling natively and to WebAssembly (D-008)."
 version.workspace = true
 edition.workspace = true
 license.workspace = true

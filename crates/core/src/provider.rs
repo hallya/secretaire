@@ -1,33 +1,33 @@
-//! Fournisseurs de reconnaissance et de lecture, interchangeables (D-004).
+//! Interchangeable speech-to-text and text-to-speech providers (D-004).
 //!
-//! L'utilisateur choisit un fournisseur par son nom, séparément pour la
-//! reconnaissance (audio → texte) et pour la lecture (texte → audio).
+//! The user picks a provider by name, separately for speech-to-text
+//! (audio → text) and text-to-speech (text → audio).
 
 use crate::audio::Audio;
 use crate::http::{HttpRequest, HttpResponse};
 use std::fmt;
 
-/// Reconnaissance vocale : audio → texte.
+/// Speech-to-text: audio → text.
 pub trait SpeechToText {
-    /// Nom sous lequel l'utilisateur choisit ce fournisseur.
+    /// Name under which the user selects this provider.
     fn name(&self) -> &str;
-    /// Requête à envoyer pour transcrire `audio`.
+    /// Request to send in order to transcribe `audio`.
     fn transcription_request(&self, audio: &Audio) -> HttpRequest;
-    /// Lit le texte transcrit dans la réponse.
+    /// Extracts the transcribed text from the response.
     fn parse_transcription(&self, response: &HttpResponse) -> Result<String, ProviderError>;
 }
 
-/// Lecture : texte → audio.
+/// Text-to-speech: text → audio.
 pub trait TextToSpeech {
-    /// Nom sous lequel l'utilisateur choisit ce fournisseur.
+    /// Name under which the user selects this provider.
     fn name(&self) -> &str;
-    /// Requête à envoyer pour lire `text` à voix haute.
+    /// Request to send in order to speak `text` aloud.
     fn synthesis_request(&self, text: &str) -> HttpRequest;
-    /// Lit l'audio dans la réponse.
+    /// Extracts the audio from the response.
     fn parse_synthesis(&self, response: &HttpResponse) -> Result<Audio, ProviderError>;
 }
 
-/// Les deux fonctions de Secretaire.
+/// The two functions of Secretaire.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Function {
     SpeechToText,
@@ -43,14 +43,14 @@ impl fmt::Display for Function {
     }
 }
 
-/// Erreurs communes à tous les fournisseurs.
+/// Errors shared by all providers.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ProviderError {
-    /// Aucun fournisseur de ce nom pour cette fonction.
+    /// No provider with this name for this function.
     UnknownProvider { function: Function, name: String },
-    /// Le fournisseur a répondu par une erreur HTTP.
+    /// The provider answered with an HTTP error.
     Http { status: u16, message: String },
-    /// La réponse ne peut pas être lue.
+    /// The response cannot be parsed.
     InvalidResponse(String),
 }
 
@@ -70,14 +70,14 @@ impl fmt::Display for ProviderError {
 
 impl std::error::Error for ProviderError {}
 
-/// Fournisseur choisi pour chaque fonction.
+/// Provider chosen for each function.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Selection {
     pub speech_to_text: String,
     pub text_to_speech: String,
 }
 
-/// Fournisseurs disponibles.
+/// Available providers.
 #[derive(Default)]
 pub struct Registry {
     speech_to_text: Vec<Box<dyn SpeechToText>>,
@@ -97,7 +97,7 @@ impl Registry {
         self.text_to_speech.push(provider);
     }
 
-    /// Fournisseur de reconnaissance nommé `name`.
+    /// Speech-to-text provider named `name`.
     pub fn speech_to_text(&self, name: &str) -> Result<&dyn SpeechToText, ProviderError> {
         self.speech_to_text
             .iter()
@@ -109,7 +109,7 @@ impl Registry {
             })
     }
 
-    /// Fournisseur de lecture nommé `name`.
+    /// Text-to-speech provider named `name`.
     pub fn text_to_speech(&self, name: &str) -> Result<&dyn TextToSpeech, ProviderError> {
         self.text_to_speech
             .iter()
@@ -121,7 +121,7 @@ impl Registry {
             })
     }
 
-    /// Un fournisseur par fonction, selon la sélection de l'utilisateur.
+    /// One provider per function, according to the user's selection.
     pub fn resolve(
         &self,
         selection: &Selection,
@@ -139,7 +139,7 @@ mod tests {
     use crate::audio::AudioFormat;
     use crate::http::{Body, Method, Part};
 
-    /// Faux fournisseur de reconnaissance : renvoie le corps de la réponse comme texte.
+    /// Fake speech-to-text provider: returns the response body as text.
     struct FakeSpeechToText(&'static str);
 
     impl SpeechToText for FakeSpeechToText {
@@ -167,7 +167,7 @@ mod tests {
         }
     }
 
-    /// Faux fournisseur de lecture : renvoie le corps de la réponse comme audio WAV.
+    /// Fake text-to-speech provider: returns the response body as WAV audio.
     struct FakeTextToSpeech(&'static str);
 
     impl TextToSpeech for FakeTextToSpeech {
@@ -222,17 +222,42 @@ mod tests {
     #[test]
     fn unknown_provider_returns_explicit_error() {
         let registry = registry();
-        let error = registry.speech_to_text("inexistant").err().expect("error");
+        let error = registry.speech_to_text("missing").err().expect("error");
         assert_eq!(
             error,
             ProviderError::UnknownProvider {
                 function: Function::SpeechToText,
-                name: "inexistant".into(),
+                name: "missing".into(),
             }
         );
         assert_eq!(
             error.to_string(),
-            "aucun fournisseur « inexistant » pour la reconnaissance"
+            "no speech-to-text provider named \"missing\""
+        );
+    }
+
+    #[test]
+    fn provider_errors_have_english_messages() {
+        let http = ProviderError::Http {
+            status: 401,
+            message: "Unauthorized".into(),
+        };
+        assert_eq!(
+            http.to_string(),
+            "provider responded with HTTP 401: Unauthorized"
+        );
+        let invalid = ProviderError::InvalidResponse("missing field `text`".into());
+        assert_eq!(
+            invalid.to_string(),
+            "invalid provider response: missing field `text`"
+        );
+        let unknown = ProviderError::UnknownProvider {
+            function: Function::TextToSpeech,
+            name: "missing".into(),
+        };
+        assert_eq!(
+            unknown.to_string(),
+            "no text-to-speech provider named \"missing\""
         );
     }
 
@@ -251,10 +276,10 @@ mod tests {
 
         let response = HttpResponse {
             status: 200,
-            body: b"bonjour".to_vec(),
+            body: b"hello".to_vec(),
         };
         assert!(response.is_success());
-        assert_eq!(stt.parse_transcription(&response).unwrap(), "bonjour");
+        assert_eq!(stt.parse_transcription(&response).unwrap(), "hello");
     }
 
     #[test]
@@ -262,9 +287,9 @@ mod tests {
         let registry = registry();
         let tts = registry.text_to_speech("fake-b").expect("provider found");
 
-        let request = tts.synthesis_request("Bonjour");
+        let request = tts.synthesis_request("Hello");
         assert_eq!(request.url, "https://fake-b.test/speak");
-        assert_eq!(request.body, Body::Json("{\"text\":\"Bonjour\"}".into()));
+        assert_eq!(request.body, Body::Json("{\"text\":\"Hello\"}".into()));
 
         let response = HttpResponse {
             status: 200,

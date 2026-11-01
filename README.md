@@ -1,12 +1,16 @@
 # secretaire
 
-Assistant de dictée vocale écrit en Rust, qui s'appuie sur l'API Mistral.
+Voice dictation and read-aloud tool written in Rust, built on the Mistral API (Voxtral).
 
-Projet en cours d'initialisation. Les décisions, le plan et le journal se trouvent dans [`notes/`](notes/).
+Dictate text into any app and have any text read aloud. The first target is prompting AI tools from the terminal; a web version will follow.
 
-## Licence
+The project is at an early stage. Development is spec-driven: every change ships with a failing test first, then a passing one, both visible in CI.
 
-Au choix, sous l'une ou l'autre de ces licences :
+## License
+
+Licensed under either of:
 
 - [Apache License 2.0](LICENSE-APACHE)
 - [MIT](LICENSE-MIT)
+
+at your option.

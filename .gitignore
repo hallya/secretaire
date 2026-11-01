@@ -4,5 +4,5 @@
 .env.*
 .DS_Store
 
-# Configuration locale d'Obsidian (D-013) : propre à chaque appareil
+# Local Obsidian settings (D-013), specific to each device
 .obsidian/

@@ -1,6 +1,6 @@
-//! Audio échangé avec les fournisseurs.
+//! Audio exchanged with providers.
 
-/// Format d'un contenu audio.
+/// Format of an audio payload.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum AudioFormat {
     Wav,
@@ -8,7 +8,7 @@ pub enum AudioFormat {
 }
 
 impl AudioFormat {
-    /// Type MIME, utilisé dans les requêtes HTTP.
+    /// MIME type, used in HTTP requests.
     pub fn mime_type(self) -> &'static str {
         match self {
             AudioFormat::Wav => "audio/wav",
@@ -16,7 +16,7 @@ impl AudioFormat {
         }
     }
 
-    /// Extension de fichier habituelle.
+    /// Usual file extension.
     pub fn extension(self) -> &'static str {
         match self {
             AudioFormat::Wav => "wav",
@@ -25,7 +25,7 @@ impl AudioFormat {
     }
 }
 
-/// Contenu audio encodé.
+/// Encoded audio payload.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Audio {
     pub format: AudioFormat,

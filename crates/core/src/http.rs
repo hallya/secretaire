@@ -1,16 +1,16 @@
-//! Requêtes et réponses HTTP, décrites sans être envoyées.
+//! HTTP requests and responses, described without being sent.
 //!
-//! Le `core` n'a pas accès au réseau (D-008) : il construit la requête et lit
-//! la réponse ; c'est le programme du terminal (ou du navigateur) qui l'envoie.
+//! The core has no network access (D-008): it builds the request and parses
+//! the response; the terminal (or browser) program is the one sending it.
 
-/// Méthode HTTP.
+/// HTTP method.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Method {
     Get,
     Post,
 }
 
-/// Corps d'une requête.
+/// Request body.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Body {
     Empty,
@@ -18,7 +18,7 @@ pub enum Body {
     Multipart(Vec<Part>),
 }
 
-/// Partie d'un formulaire `multipart/form-data`.
+/// Part of a `multipart/form-data` body.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Part {
     Text {
@@ -33,7 +33,7 @@ pub enum Part {
     },
 }
 
-/// Requête à envoyer à un fournisseur.
+/// Request to send to a provider.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct HttpRequest {
     pub method: Method,
@@ -42,7 +42,7 @@ pub struct HttpRequest {
     pub body: Body,
 }
 
-/// Réponse reçue d'un fournisseur.
+/// Response received from a provider.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct HttpResponse {
     pub status: u16,
@@ -50,7 +50,7 @@ pub struct HttpResponse {
 }
 
 impl HttpResponse {
-    /// Vrai pour un statut 2xx.
+    /// True for a 2xx status.
     pub fn is_success(&self) -> bool {
         (200..300).contains(&self.status)
     }

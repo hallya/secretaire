@@ -1,12 +1,12 @@
-# CI de preuve (T4) : chaque changement de code est compilé et testé.
-# Un run rouge = preuve « avant » ; un run vert = preuve « après ».
+# Proof CI (T4): every code change is built and tested.
+# A red run is the "before" proof; a green run is the "after" proof.
 name: CI
 
 on:
   push:
     branches: [main]
-    # Les notes et la documentation ne déclenchent pas la CI
-    # (notamment les petits commits automatiques d'Obsidian, D-013).
+    # Notes and documentation do not trigger the CI
+    # (notably Obsidian's small automatic commits, D-013).
     paths-ignore:
       - "notes/**"
       - "**.md"
