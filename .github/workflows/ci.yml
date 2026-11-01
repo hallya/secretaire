@@ -1,0 +1,43 @@
+# CI de preuve (T4) : chaque changement de code est compilé et testé.
+# Un run rouge = preuve « avant » ; un run vert = preuve « après ».
+name: CI
+
+on:
+  push:
+    branches: [main]
+    # Les notes et la documentation ne déclenchent pas la CI
+    # (notamment les petits commits automatiques d'Obsidian, D-013).
+    paths-ignore:
+      - "notes/**"
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "notes/**"
+      - "**.md"
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  tests-natif:
+    name: Tests (natif)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --workspace --locked
+
+  compilation-wasm:
+    name: Compilation (wasm32)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build -p secretaire-core --target wasm32-unknown-unknown --locked
