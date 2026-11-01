@@ -5,9 +5,7 @@
 
 /// Version de la bibliothèque, telle que déclarée dans `Cargo.toml`.
 pub fn version() -> &'static str {
-    // Étape rouge de T4 : implémentation volontairement fausse, pour prouver
-    // que la CI détecte un test qui échoue.
-    ""
+    env!("CARGO_PKG_VERSION")
 }
 
 #[cfg(test)]
