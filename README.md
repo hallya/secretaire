@@ -6,4 +6,7 @@ Projet en cours d'initialisation. Les décisions, le plan et le journal se trouv
 
 ## Licence
 
-[MIT](LICENSE)
+Au choix, sous l'une ou l'autre de ces licences :
+
+- [Apache License 2.0](LICENSE-APACHE)
+- [MIT](LICENSE-MIT)
