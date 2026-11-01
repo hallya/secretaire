@@ -2,9 +2,9 @@
 
 > [!summary] Où en est-on
 > L'environnement de travail est en place, et le MVP est découpé (T10 à T17).
-> Aucune fonctionnalité du produit n'existe encore.
+> Premier morceau du produit : les interfaces de reconnaissance et de lecture (T10).
 >
-> **Prochaine action :** [[T10 - Interfaces reconnaissance et lecture]]
+> **Prochaine action :** [[T11 - Transcription Mistral dans core]]
 
 ## Backlog
 ![[Backlog.base#Kanban]]
