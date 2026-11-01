@@ -38,4 +38,4 @@
 - 💡 La CI ne fait que compiler en `wasm32` ; exécuter les tests en `wasm32`, le formatage, les lints et le multi-OS sont notés en nice-to-have (T4b à T4d).
 - ✅ 16:06 : `.obsidian/` ajouté au `.gitignore`, en préparation de T8.
 - 💡 16:10 : GitHub lance la CI sur le **dernier commit d'un push**, pas sur chaque commit. Pour lire la preuve d'un commit, le pousser seul ou chercher le run du commit de tête. Un push qui ne touche que `notes/` ne déclenche aucun run (vérifié avec `e9b22a5`) ; le push `d60ea3b` + `ac9bd9b` (avec le `.gitignore`) a donné le run vert `41319372779`.
-- ✅ test de synchronisation depuis Obsidian
+- ✅ test de synchronisation depuis Obsidian- ✅ 18:36 : réponse de Claude — test reçu (`5fed9e4`, écrit dans Obsidian, signé avec la clé Bitwarden). Cette ligne doit apparaître dans Obsidian en moins d'une minute.
