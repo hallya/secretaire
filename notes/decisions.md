@@ -61,7 +61,7 @@ Origine : `CLAUDE.md` du commit initial.
 - Cloud (claude.ai/code) : notes, planification, code, preuves par la CI.
 - Mac en local : uniquement les tests physiques.
 
-## D-013 — Outil de collaboration sur les notes : Obsidian ouvert sur le repo · 2026-11-01 · proposée (révisée, seconde recherche en cours)
+## D-013 — Outil de collaboration sur les notes : Obsidian ouvert sur le repo · 2026-11-01 · proposée (révisée après la seconde recherche, en attente de confirmation)
 
 Besoin exprimé par l'utilisateur : GitHub est simple mais peu ergonomique pour lui. Il faut un outil gratuit (auto-hébergeable si possible) que Claude utilise par MCP ou API, et que l'utilisateur utilise par le web ou une application native.
 
@@ -77,6 +77,34 @@ Options évaluées :
 - **Claude Docs** (déjà inclus dans claude.ai) : documents modifiables et commentables dans l'application Claude, mais illisibles par la CI et hors du repo.
 
 Raison du choix recommandé : c'est la seule option qui ajoute une vraie application native sans créer une deuxième source de vérité ni rien à héberger.
+
+**Seconde recherche (2026-11-01, 15:45), demandée par l'utilisateur : Anytype, recherche élargie, NAS Synology.**
+
+Fait nouveau : avec le NAS, un outil auto-hébergé devient joignable par Claude via un connecteur personnalisé (claude.ai : Customize > Connectors > Add custom connector). Conditions : serveur MCP distant joignable depuis internet par les serveurs d'Anthropic, en HTTPS, avec OAuth ou un en-tête d'authentification. Ces connecteurs fonctionnent sur le web, l'application de bureau et le mobile.
+
+- **Anytype** : la meilleure application pour l'utilisateur (natives sur toutes les plateformes, local-first, chiffrée de bout en bout, vues kanban). Mais côté Claude :
+  - le MCP officiel est local : il parle à l'application de bureau, donc il est injoignable depuis le cloud ;
+  - le client sans interface officiel (`anytype-cli`) expose une API HTTP, mais aucun MCP ;
+  - le seul connecteur distant trouvé est communautaire : 0 étoile, un seul mainteneur, et il repose sur une API v2 encore en pré-version ;
+  - les notes sortiraient de git, donc deux sources de vérité ;
+  - plan gratuit : 100 Mo de sauvegarde distante, ou un nœud de synchronisation auto-hébergé sur le NAS (Docker Compose), avec bascule manuelle de tous les appareils.
+
+  Verdict : excellente pour l'utilisateur, fragile pour Claude. À revoir si Anytype publie un MCP distant officiel.
+- **Outline** (wiki auto-hébergeable) : MCP officiel intégré depuis février 2026, en HTTP avec OAuth ou clé API, y compris en auto-hébergé. Devient viable sur le NAS. Limites : pas de kanban, un fournisseur d'identité externe à configurer, licence BSL (pas open source au sens strict), interface web.
+- **Plane** (backlog, auto-hébergeable) : MCP officiel distant. Avec l'édition communautaire, seul l'accès par clé API pourrait convenir à un connecteur personnalisé, sans garantie. À tester avant de compter dessus.
+- **AFFiNE** : MCP officiel en HTTP avec jeton, mais écriture réservée aux versions de développement. Inchangé.
+- **AppFlowy, Nextcloud, SiYuan, Trilium, BookStack, Wiki.js, Joplin, Logseq** : au mieux des MCP communautaires, ou seulement une API. Rien de plus solide que les options ci-dessus.
+- Coût commun à toute option auto-hébergée : exposer le NAS sur internet (proxy inverse et certificat HTTPS, idéalement limité aux adresses IP d'Anthropic), puis le maintenir.
+
+Conclusion de la seconde recherche : la recommandation Obsidian tient. C'est la seule option qui ne demande ni d'exposer le NAS, ni une deuxième source de vérité, ni de dépendre d'un connecteur communautaire. Si l'utilisateur veut plus tard une vraie application auto-hébergée : Outline sur le NAS est l'option la plus solide côté Claude.
+
+## D-016 — Rôle du NAS Synology DS1621xs+ · 2026-11-01 · proposée
+
+Matériel : Xeon D-1527 (4 cœurs, 2,2 GHz), 8 Go de RAM extensibles à 32 Go, 10 GbE, sans carte graphique.
+
+- **Oui, plus tard, si utile** : héberger un outil auto-hébergé (Container Manager) si D-013 évolue ; héberger la version web de Secretaire (alternative à GitHub Pages) ; sauvegarder le repo.
+- **Non** : un runner GitHub Actions auto-hébergé. GitHub le déconseille pour un repo public, car le code de n'importe quelle pull request s'exécuterait sur le NAS, et les runners de GitHub sont gratuits pour les repos publics.
+- **Non pour le MVP** : faire tourner les modèles Voxtral sur le NAS. Sans carte graphique, ce serait trop lent pour du temps réel, et D-006 prévoit une API distante.
 
 ## D-014 — Un seul endroit pour travailler : le projet claude.ai « Secretaire » · 2026-11-01 · acceptée
 
