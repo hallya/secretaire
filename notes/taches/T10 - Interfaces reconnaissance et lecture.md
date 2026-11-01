@@ -1,6 +1,6 @@
 ---
 id: T10
-statut: 1. À faire
+statut: 2. En cours
 priorite: MVP
 ---
 # T10 · Interfaces reconnaissance et lecture
