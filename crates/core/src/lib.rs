@@ -5,10 +5,12 @@
 
 pub mod audio;
 pub mod http;
+pub mod mistral;
 pub mod provider;
 
 pub use audio::{Audio, AudioFormat};
 pub use http::{Body, HttpRequest, HttpResponse, Method, Part};
+pub use mistral::MistralSpeechToText;
 pub use provider::{Function, ProviderError, Registry, Selection, SpeechToText, TextToSpeech};
 
 /// Library version, as declared in `Cargo.toml`.
