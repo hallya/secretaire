@@ -1,6 +1,7 @@
 ---
 id: D-018
-statut: 3. Acceptée
+statut: 4. Remplacée
+remplacee_par: D-020
 date: 2026-11-01
 origine: utilisateur (révision de la proposition de Claude)
 ---

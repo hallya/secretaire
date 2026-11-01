@@ -5,7 +5,7 @@ priorite: MVP
 ---
 # T12 · Transcrire un fichier depuis le terminal
 
-`secretaire transcrire fichier.wav` affiche le texte, avec un vrai appel à Mistral. ⚠️ Utilise la clé Mistral enregistrée dans les secrets GitHub (`MISTRAL_API_KEY`).
+`secretaire transcribe file.wav` affiche le texte, avec un vrai appel à Mistral. ⚠️ Utilise la clé Mistral enregistrée dans les secrets GitHub (`MISTRAL_API_KEY`).
 
 ## Preuve
 - **Avant :** La commande n'existe pas.

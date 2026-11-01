@@ -5,7 +5,7 @@ priorite: MVP
 ---
 # T16 · Dicter
 
-`secretaire dicter` : micro → texte affiché dans le terminal, qu'on peut envoyer à une IA (`secretaire dicter | claude`).
+`secretaire dictate` : micro → texte affiché dans le terminal, qu'on peut envoyer à une IA (`secretaire dictate | claude`).
 
 ## Preuve
 - **Avant :** La commande n'existe pas.

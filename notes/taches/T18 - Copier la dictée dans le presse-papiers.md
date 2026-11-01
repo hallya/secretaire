@@ -5,7 +5,7 @@ priorite: nice-to-have
 ---
 # T18 · Copier la dictée dans le presse-papiers
 
-Le texte dicté est aussi copié, pour le coller dans n'importe quelle application. En attendant : `secretaire dicter | pbcopy`.
+Le texte dicté est aussi copié, pour le coller dans n'importe quelle application. En attendant : `secretaire dictate | pbcopy`.
 
 ## Preuve
 - **Avant :** Presse-papiers inchangé après une dictée.

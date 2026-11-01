@@ -5,7 +5,7 @@ priorite: MVP
 ---
 # T17 · Lire à voix haute
 
-`secretaire lire "…"` joue le son directement sur les haut-parleurs.
+`secretaire speak "…"` joue le son directement sur les haut-parleurs.
 
 ## Preuve
 - **Avant :** Le texte ne peut être lu qu'en fichier (T14).

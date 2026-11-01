@@ -53,7 +53,8 @@ Une ou deux phrases : ce que la tâche change, et pour qui.
 - **Prioriser.** Marquer chaque tâche MVP ou nice-to-have, et avancer d'abord vers le MVP.
 - **Dire quand une preuve est hors de portée.** Si tu ne peux pas vérifier une preuve toi-même, dis-le et cherche avec l'utilisateur une autre façon de la fournir.
 - **Noter les preuves** dans le message de commit et dans la note de la tâche.
-- **Langue du code (D-018)** : tout en anglais, y compris les noms des tests et les données de test. Commentaires de documentation en français. Interface utilisateur (commandes, messages) en français.
+- **Langue (D-020)** : tout ce qui est dans le repo hors de `notes/` est en anglais : code, tests, commentaires, messages d'erreur, commandes, README, CI, **messages de commit**. Seules les notes Obsidian (et ce fichier) sont en français.
+- **Dépendances (D-019)** : ces conversations n'ont pas accès à crates.io. Ajoute la dépendance dans `Cargo.toml` et pousse : le job `lockfile` de la CI commite `Cargo.lock` lui-même (`chore: update Cargo.lock`). Pense à `git pull` ensuite. Le code avec dépendances ne compile que dans la CI.
 
 ## Mise à jour des notes, à la fin de chaque tâche
 
