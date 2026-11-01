@@ -21,7 +21,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn version_correspond_au_cargo_toml() {
+    fn version_matches_cargo_toml() {
         assert_eq!(version(), "0.1.0");
     }
 }

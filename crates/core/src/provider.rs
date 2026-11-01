@@ -150,7 +150,7 @@ mod tests {
         fn transcription_request(&self, audio: &Audio) -> HttpRequest {
             HttpRequest {
                 method: Method::Post,
-                url: format!("https://{}.test/transcrire", self.0),
+                url: format!("https://{}.test/transcribe", self.0),
                 headers: vec![],
                 body: Body::Multipart(vec![Part::File {
                     name: "file".into(),
@@ -178,9 +178,9 @@ mod tests {
         fn synthesis_request(&self, text: &str) -> HttpRequest {
             HttpRequest {
                 method: Method::Post,
-                url: format!("https://{}.test/lire", self.0),
+                url: format!("https://{}.test/speak", self.0),
                 headers: vec![],
-                body: Body::Json(format!("{{\"texte\":\"{text}\"}}")),
+                body: Body::Json(format!("{{\"text\":\"{text}\"}}")),
             }
         }
 
@@ -194,37 +194,35 @@ mod tests {
 
     fn registry() -> Registry {
         let mut registry = Registry::new();
-        registry.register_speech_to_text(Box::new(FakeSpeechToText("faux-a")));
-        registry.register_speech_to_text(Box::new(FakeSpeechToText("faux-b")));
-        registry.register_text_to_speech(Box::new(FakeTextToSpeech("faux-a")));
-        registry.register_text_to_speech(Box::new(FakeTextToSpeech("faux-b")));
+        registry.register_speech_to_text(Box::new(FakeSpeechToText("fake-a")));
+        registry.register_speech_to_text(Box::new(FakeSpeechToText("fake-b")));
+        registry.register_text_to_speech(Box::new(FakeTextToSpeech("fake-a")));
+        registry.register_text_to_speech(Box::new(FakeTextToSpeech("fake-b")));
         registry
     }
 
     #[test]
-    fn choisit_le_fournisseur_de_reconnaissance_par_son_nom() {
+    fn selects_speech_to_text_provider_by_name() {
         let registry = registry();
-        let provider = registry
-            .speech_to_text("faux-b")
-            .expect("fournisseur trouvé");
-        assert_eq!(provider.name(), "faux-b");
+        let provider = registry.speech_to_text("fake-b").expect("provider found");
+        assert_eq!(provider.name(), "fake-b");
     }
 
     #[test]
-    fn choisit_independamment_reconnaissance_et_lecture() {
+    fn selects_speech_to_text_and_text_to_speech_independently() {
         let registry = registry();
         let selection = Selection {
-            speech_to_text: "faux-a".into(),
-            text_to_speech: "faux-b".into(),
+            speech_to_text: "fake-a".into(),
+            text_to_speech: "fake-b".into(),
         };
-        let (stt, tts) = registry.resolve(&selection).expect("sélection valide");
-        assert_eq!((stt.name(), tts.name()), ("faux-a", "faux-b"));
+        let (stt, tts) = registry.resolve(&selection).expect("valid selection");
+        assert_eq!((stt.name(), tts.name()), ("fake-a", "fake-b"));
     }
 
     #[test]
-    fn un_fournisseur_inconnu_donne_une_erreur_explicite() {
+    fn unknown_provider_returns_explicit_error() {
         let registry = registry();
-        let error = registry.speech_to_text("inexistant").err().expect("erreur");
+        let error = registry.speech_to_text("inexistant").err().expect("error");
         assert_eq!(
             error,
             ProviderError::UnknownProvider {
@@ -239,11 +237,9 @@ mod tests {
     }
 
     #[test]
-    fn un_fournisseur_de_reconnaissance_fait_l_aller_retour_requete_reponse() {
+    fn speech_to_text_provider_round_trips_request_and_response() {
         let registry = registry();
-        let stt = registry
-            .speech_to_text("faux-a")
-            .expect("fournisseur trouvé");
+        let stt = registry.speech_to_text("fake-a").expect("provider found");
         let audio = Audio {
             format: AudioFormat::Wav,
             bytes: vec![1, 2, 3],
@@ -251,7 +247,7 @@ mod tests {
 
         let request = stt.transcription_request(&audio);
         assert_eq!(request.method, Method::Post);
-        assert_eq!(request.url, "https://faux-a.test/transcrire");
+        assert_eq!(request.url, "https://fake-a.test/transcribe");
 
         let response = HttpResponse {
             status: 200,
@@ -262,15 +258,13 @@ mod tests {
     }
 
     #[test]
-    fn un_fournisseur_de_lecture_fait_l_aller_retour_requete_reponse() {
+    fn text_to_speech_provider_round_trips_request_and_response() {
         let registry = registry();
-        let tts = registry
-            .text_to_speech("faux-b")
-            .expect("fournisseur trouvé");
+        let tts = registry.text_to_speech("fake-b").expect("provider found");
 
         let request = tts.synthesis_request("Bonjour");
-        assert_eq!(request.url, "https://faux-b.test/lire");
-        assert_eq!(request.body, Body::Json("{\"texte\":\"Bonjour\"}".into()));
+        assert_eq!(request.url, "https://fake-b.test/speak");
+        assert_eq!(request.body, Body::Json("{\"text\":\"Bonjour\"}".into()));
 
         let response = HttpResponse {
             status: 200,
