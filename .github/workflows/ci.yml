@@ -22,17 +22,19 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  tests-natif:
-    name: Tests (natif)
+  tests-native:
+    name: Tests (native)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      - run: cargo test --workspace --locked
+      # No --locked: a dependency added from a workspace without crates.io
+      # access is resolved here, then committed by the `lockfile` job (D-019).
+      - run: cargo test --workspace
 
-  compilation-wasm:
-    name: Compilation (wasm32)
+  build-wasm:
+    name: Build (wasm32)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -40,4 +42,35 @@ jobs:
         with:
           targets: wasm32-unknown-unknown
       - uses: Swatinem/rust-cache@v2
-      - run: cargo build -p secretaire-core --target wasm32-unknown-unknown --locked
+      - run: cargo build -p secretaire-core --target wasm32-unknown-unknown
+
+  # Keeps Cargo.lock in sync with Cargo.toml (D-019). Only on pushes to main,
+  # never from pull requests, and only after the tests pass.
+  lockfile:
+    name: Lockfile
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [tests-native, build-wasm]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+      # --workspace updates only workspace members; other packages are added
+      # only when missing from Cargo.lock, so existing versions stay pinned.
+      - name: Update Cargo.lock
+        run: cargo update --workspace
+      - name: Commit Cargo.lock if it changed
+        run: |
+          if git diff --quiet -- Cargo.lock; then
+            echo "Cargo.lock is up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Cargo.lock
+          git commit -m "chore: update Cargo.lock"
+          git pull --rebase origin main
+          git push origin HEAD:main
