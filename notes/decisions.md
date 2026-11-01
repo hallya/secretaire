@@ -55,13 +55,13 @@ Structure mise en place par l'utilisateur au commit initial. Raison constatée l
 
 Fichiers : `decisions.md` (décisions prises et à prendre), `backlog.md` (tâches faites et à venir), `journal.md` (réussites, échecs, leçons).
 
-## D-012 — Répartition des sessions · 2026-11-01 · acceptée
+## D-012 — Répartition des sessions · 2026-11-01 · remplacée (par D-014)
 
 Origine : `CLAUDE.md` du commit initial.
 - Cloud (claude.ai/code) : notes, planification, code, preuves par la CI.
 - Mac en local : uniquement les tests physiques.
 
-## D-013 — Outil de collaboration sur les notes : Obsidian ouvert sur le repo · 2026-11-01 · proposée (révisée)
+## D-013 — Outil de collaboration sur les notes : Obsidian ouvert sur le repo · 2026-11-01 · proposée (révisée, seconde recherche en cours)
 
 Besoin exprimé par l'utilisateur : GitHub est simple mais peu ergonomique pour lui. Il faut un outil gratuit (auto-hébergeable si possible) que Claude utilise par MCP ou API, et que l'utilisateur utilise par le web ou une application native.
 
@@ -78,7 +78,7 @@ Options évaluées :
 
 Raison du choix recommandé : c'est la seule option qui ajoute une vraie application native sans créer une deuxième source de vérité ni rien à héberger.
 
-## D-014 — Un seul endroit pour travailler : le projet claude.ai « Secretaire » · 2026-11-01 · proposée (révisée)
+## D-014 — Un seul endroit pour travailler : le projet claude.ai « Secretaire » · 2026-11-01 · acceptée
 
 Remplace la version précédente (« pilotage dans le projet, code dans les sessions Claude Code »), devenue inutile. Constat du 2026-11-01 vers 15:30 : depuis une conversation du projet, Claude peut pousser sur le repo et lire l'API GitHub, y compris les résultats de CI.
 

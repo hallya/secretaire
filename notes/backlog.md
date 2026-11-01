@@ -8,8 +8,7 @@
 
 | ID | Tâche | Priorité | Statut | Preuve avant → après |
 |---|---|---|---|---|
-| T3 | Règle de reprise : toute nouvelle conversation du projet retrouve l'état seule | MVP | En cours : `CLAUDE.md` poussé ; texte à coller dans les instructions du projet claude.ai (D-014) | Nouvelle conversation du projet : « Où en est-on ? » donne l'état et la prochaine action ⚠️ test fait par l'utilisateur |
-| T8 | Fenêtre ergonomique sur les notes : Obsidian ouvert sur le repo, synchronisé avec GitHub (D-013) | MVP, si D-013 est acceptée | En attente de décision | Aucune modification de l'utilisateur dans l'historique → un commit de test fait depuis Obsidian, visible sur GitHub (vérifiable par Claude) |
+| T8 | Fenêtre ergonomique sur les notes (outil choisi en D-013) | MVP | En attente de D-013 (seconde recherche demandée : Anytype, recherche élargie, Synology) | Aucune modification de l'utilisateur dans l'historique → un commit de test fait depuis Obsidian, visible sur GitHub (vérifiable par Claude) |
 | T4 | CI de preuve (GitHub Actions) : compilation et tests en natif et en `wasm32`, en ignorant les changements de `notes/` | MVP | À faire | Aucun run → Claude lit lui-même le statut d'un run via l'API GitHub (accès vérifié le 2026-11-01) |
 | T6 | Découper le MVP fonctionnel (dictée → texte, texte → voix) en tâches unitaires avec leurs preuves | MVP | À faire, à valider avec l'utilisateur | Aucune tâche fonctionnelle → liste validée dans ce fichier |
 | T8b | Vue tableau (kanban) du backlog dans Obsidian | Nice-to-have | À faire, après T8 | Backlog en tableau → colonnes « À faire / En cours / Fait » affichées |
@@ -20,6 +19,7 @@
 
 | ID | Tâche | Priorité | Fait le | Preuve avant → après |
 |---|---|---|---|---|
+| T3 | Règle de reprise : toute nouvelle conversation du projet retrouve l'état seule | MVP | 2026-11-01 | Aucune règle → nouvelle conversation du projet : « Où en est-on ? » a rattaché le repo, lu les notes et donné l'état, les décisions en attente et la prochaine action, conformes aux notes (validé par l'utilisateur) |
 | T0 | Rattacher le repo à la conversation du projet, en lecture et en écriture | MVP | 2026-11-01 | Push refusé (403) → `f7f1096`, `b455a4e`, `3a37773` visibles sur `origin/main` |
 | T1 | Structure de notes dans le repo (`notes/`, `CLAUDE.md`) | MVP | 2026-11-01 | Repo vide → commit initial `e8b5335` |
 | T2 | Migrer décisions, backlog et journal depuis la note du projet claude.ai | MVP | 2026-11-01 | « Voxtral » dans `notes/` : 0 → au moins 1 résultat ; décisions : 0 → 15 |

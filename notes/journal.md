@@ -28,3 +28,6 @@
 - ✅ 15:30 : depuis la conversation du projet, l'API GitHub répond 200 (repo et liste des runs de CI). Claude peut donc lire lui-même les preuves de CI.
 - 💡 Avec le push et la lecture de la CI, tout peut se faire depuis le projet claude.ai : D-014 révisée en « un seul endroit pour travailler ».
 - 💡 15:35 : analyse des outils de collaboration (D-013). Aucun outil auto-hébergé dans l'annuaire des connecteurs de Claude ; recommandation : Obsidian ouvert sur le repo, Notion en plan B.
+- ✅ 15:40 : **T3 prouvé.** Dans une nouvelle conversation du projet, « Où en est-on ? » a rattaché le repo, lu `CLAUDE.md` et les notes sans aide, puis donné l'état, les décisions en attente et la prochaine action, conformes aux notes. Validé par l'utilisateur.
+- ✅ 15:40 : D-014 acceptée (un seul endroit : le projet claude.ai). D-012 remplacée, `CLAUDE.md` mis à jour.
+- 💡 15:40 : l'utilisateur dispose d'un NAS Synology DS1621xs+, à prendre en compte pour l'auto-hébergement et les tâches déléguables. D-013 rouverte : avis sur Anytype et recherche élargie demandés avant décision.

@@ -8,9 +8,10 @@ Toutes les notes du projet sont dans `notes/`. Lis-les au début de chaque sessi
 
 Si l'utilisateur demande « Où en est-on ? », réponds à partir de ces trois fichiers : l'état actuel, les décisions en attente, et la prochaine action.
 
-## Répartition des sessions
+## Où l'on travaille (D-014)
 
-- **Cloud** (claude.ai/code) : notes, planification, code, et preuves par la CI (GitHub Actions).
+- **Un seul endroit pour l'utilisateur : le projet claude.ai « Secretaire ».** Notes, planification, code, push, et lecture des preuves de CI se font depuis ses conversations.
+- **Preuves** : CI GitHub Actions (ces conversations n'ont pas accès à crates.io ni à Mistral).
 - **Mac en local** : uniquement les tests physiques (dictée au micro réelle, écriture dans une autre application).
 
 ## Façon de travailler
