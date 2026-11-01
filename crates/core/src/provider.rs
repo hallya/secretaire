@@ -37,8 +37,8 @@ pub enum Function {
 impl fmt::Display for Function {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.write_str(match self {
-            Function::SpeechToText => "reconnaissance",
-            Function::TextToSpeech => "lecture",
+            Function::SpeechToText => "speech-to-text",
+            Function::TextToSpeech => "text-to-speech",
         })
     }
 }
@@ -58,12 +58,14 @@ impl fmt::Display for ProviderError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
             ProviderError::UnknownProvider { function, name } => {
-                write!(f, "aucun fournisseur « {name} » pour la {function}")
+                write!(f, "no {function} provider named \"{name}\"")
             }
             ProviderError::Http { status, message } => {
-                write!(f, "le fournisseur a répondu {status} : {message}")
+                write!(f, "provider responded with HTTP {status}: {message}")
             }
-            ProviderError::InvalidResponse(detail) => write!(f, "réponse illisible : {detail}"),
+            ProviderError::InvalidResponse(detail) => {
+                write!(f, "invalid provider response: {detail}")
+            }
         }
     }
 }
