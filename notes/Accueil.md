@@ -1,10 +1,10 @@
 # Secretaire · Accueil
 
 > [!summary] Où en est-on
-> L'environnement de travail est en place : repo, notes, CI de preuve, Obsidian.
+> L'environnement de travail est en place, et le MVP est découpé (T10 à T17).
 > Aucune fonctionnalité du produit n'existe encore.
 >
-> **Prochaine action :** [[T6 - Découper le MVP]]
+> **Prochaine action :** [[T10 - Interfaces reconnaissance et lecture]]
 
 ## Backlog
 ![[Backlog.base#Kanban]]
