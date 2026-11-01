@@ -11,7 +11,7 @@ Toutes les notes du projet sont dans `notes/`, au format Obsidian (D-017). Lis-l
 Si l'utilisateur demande « Où en est-on ? », réponds à partir de ces notes : l'état actuel, les décisions en attente (statut `1. À prendre` ou `2. Proposée`), et la prochaine action.
 - La prochaine action est la tâche MVP en `2. En cours`.
 - S'il n'y en a pas, c'est la première tâche MVP en `1. À faire`, ou celle désignée dans `Accueil.md`.
-- Pour lister les statuts : `grep -H "^statut:" notes/taches/*.md`.
+- Pour lister les statuts : `grep -H "^statut:" notes/taches/*.md`. Pour compter (tâches faites, etc.), utilise une commande comme `grep -l "^statut: 4. Fait" notes/taches/*.md | wc -l`, jamais de tête.
 
 ## Format des notes
 
